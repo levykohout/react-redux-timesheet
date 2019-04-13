@@ -3,5 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {},
-  "workspaces": ["lab-*", "final"]
+  "workspaces": [
+    "lab-*",
+    "final"
+  ]
 }
