@@ -6,7 +6,7 @@ class Projects extends React.Component {
     projects: [
       {
         _id: 1,
-        decription: 'Project1',
+        name: 'Project1',
         description: 'This is your first project'
       },
       {
