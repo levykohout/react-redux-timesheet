@@ -5,7 +5,7 @@ import EmployeeRow from './EmployeeRow';
 
 class EmployeeTable extends React.Component {
   render() {
-    const { employees } = this.props;
+    const { employees, onDelete, onRestore } = this.props;
 
     return (
       <Table bordered striped>
@@ -16,11 +16,17 @@ class EmployeeTable extends React.Component {
             <th>First Name</th>
             <th>Last Name</th>
             <th>Admin</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <tbody>
           {employees.map(employee => (
-            <EmployeeRow employee={ employee } key={ employee._id }/>
+            <EmployeeRow
+              employee={employee}
+              key={employee._id}
+              onDelete={onDelete}
+              onRestore={onRestore}
+            />
           ))}
         </tbody>
       </Table>
@@ -33,7 +39,9 @@ EmployeeTable.defaultProps = {
 };
 
 EmployeeTable.propTypes = {
-  employees: PropTypes.array.isRequired
+  employees: PropTypes.array.isRequired,
+  onDelete: PropTypes.func,
+  onRestore: PropTypes.func
 };
 
 export default EmployeeTable;

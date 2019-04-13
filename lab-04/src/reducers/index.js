@@ -7,7 +7,8 @@ import employees from './employee-reducer';
 const rootReducer = combineReducers({
   projects: projects,
   timesheets: timesheets,
-  timeunits: timeunits
+  timeunits: timeunits,
+  employees: employees
 });
 
 export default rootReducer;
