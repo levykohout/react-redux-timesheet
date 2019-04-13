@@ -5,12 +5,11 @@ import FieldWrapper from '../form/FieldWrapper';
 import FormControls from '../form/FormControls';
 
 class ProjectForm extends React.Component {
-
-  handleSave = (values) => {
+  handleSave = values => {
     this.props.handleSave(values);
   };
 
-  validate = (values) => {
+  validate = values => {
     const errors = {};
 
     if (!values.name) {
@@ -31,26 +30,34 @@ class ProjectForm extends React.Component {
 
     return (
       <Formik
-        initialValues={ {
+        initialValues={{
           name: project.name || '',
           description: project.description || '',
           _id: project._id
-        } }
-        validate={ this.validate }
-        onSubmit={ this.handleSave }
+        }}
+        validate={this.validate}
+        onSubmit={this.handleSave}
       >
-        { ({ isValid, errors, touched, handleReset, handleSubmit }) => (
+        {({ isValid, errors, touched, handleReset, handleSubmit }) => (
           <Form>
-            <FieldWrapper type="text" name="name" label="Name" invalid={errors.name} touched={touched.name} />
-            <FieldWrapper type="text" name="description" label="Description" invalid={errors.description} touched={touched.description} />
-
-            <FormControls
-              allowSubmit={isValid}
-              onSubmit={handleSubmit}
-              onReset={handleReset}
+            <FieldWrapper
+              type="text"
+              name="name"
+              label="Name"
+              invalid={errors.name}
+              touched={touched.name}
             />
+            <FieldWrapper
+              type="text"
+              name="description"
+              label="Description"
+              invalid={errors.description}
+              touched={touched.description}
+            />
+
+            <FormControls allowSubmit={isValid} onSubmit={handleSubmit} onReset={handleReset} />
           </Form>
-        ) }
+        )}
       </Formik>
     );
   }

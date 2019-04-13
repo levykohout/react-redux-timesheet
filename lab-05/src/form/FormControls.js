@@ -23,8 +23,12 @@ FormControls.propTypes = {
 FormControls.defaultProps = {
   action: 'Save',
   allowSubmit: true,
-  onSubmit: () => {},
-  onReset: () => {}
+  onSubmit: () => {
+    //submit form
+  },
+  onReset: () => {
+    //clear fields here
+  }
 };
 
 export default FormControls;

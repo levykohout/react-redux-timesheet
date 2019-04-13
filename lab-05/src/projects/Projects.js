@@ -13,17 +13,16 @@ class Projects extends React.Component {
   }
 
   render() {
-    const { projects } = this.props;
+    const { projects, deleteEmployee, restoreEmployee } = this.props;
 
     return (
       <div>
         <h1>Projects</h1>
+
+        <ProjectTable projects={projects} onDelete={deleteEmployee} onRestore={restoreEmployee} />
         <Link to="/projects/detail">
-          <Button bsStyle="primary">
-            New Project
-          </Button>
+          <Button bsStyle="primary">New Project</Button>
         </Link>
-        <ProjectTable projects={projects} />
       </div>
     );
   }
@@ -38,7 +37,7 @@ Projects.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    projects: state.projects.data,
+    projects: state.projects.data
   };
 };
 
@@ -48,4 +47,7 @@ const mapDispatchToProps = {
   restoreEmployee: ProjectActionCreators.restoreProject
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Projects);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Projects);

@@ -5,7 +5,7 @@ import ProjectRow from './ProjectRow';
 
 class ProjectTable extends Component {
   render() {
-    const { projects } = this.props;
+    const { projects, onDelete, onRestore } = this.props;
 
     return (
       <Table bordered striped hover>
@@ -13,11 +13,17 @@ class ProjectTable extends Component {
           <tr>
             <th>Name</th>
             <th>Description</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <tbody>
           {projects.map(project => (
-            <ProjectRow project={ project } key={ project._id } />
+            <ProjectRow
+              project={project}
+              key={project._id}
+              onDelete={onDelete}
+              onRestore={onRestore}
+            />
           ))}
         </tbody>
       </Table>
@@ -30,7 +36,9 @@ ProjectTable.defaultProps = {
 };
 
 ProjectTable.propTypes = {
-  projects: PropTypes.array.isRequired
+  projects: PropTypes.array.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onRestore: PropTypes.func.isRequired
 };
 
 export default ProjectTable;

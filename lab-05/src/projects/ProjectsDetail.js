@@ -4,9 +4,45 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import ProjectForm from './ProjectForm';
 import * as ProjectActions from '../actions/ProjectActionCreator';
+import Axios from 'axios';
+
+const apiUrl = '/api/projects';
+
+const url = projectId => {
+  if (projectId) {
+    return `${apiUrl}/${projectId}`;
+  }
+  return apiUrl;
+};
 
 class ProjectsDetail extends React.Component {
-  handleSave = (values) => {
+  static propTypes = {
+    history: PropTypes.object.isRequired
+  };
+
+  static defaultProps = {};
+
+  state = {
+    project: null
+  };
+
+  async componentDidMount() {
+    const { match } = this.props;
+    const { _id } = match.params;
+    const { data: project } = await Axios.get(url(_id));
+    this.setState({ project });
+  }
+
+  onUpdate = async project => {
+    const response = await Axios.put(url(project._id), project);
+    return response.data;
+  };
+
+  onCreate = async project => {
+    const response = await Axios.post(url(project._id), project);
+    return response.data;
+  };
+  handleSave = values => {
     const { onCreate, onUpdate, history } = this.props;
 
     const result = values._id ? onUpdate(values) : onCreate(values);
@@ -33,7 +69,7 @@ ProjectsDetail.propTypes = {
   project: PropTypes.object.isRequired,
   history: PropTypes.object,
   onCreate: PropTypes.func,
-  onUpdate: PropTypes.func,
+  onUpdate: PropTypes.func
 };
 
 ProjectsDetail.defaultProps = {
@@ -53,4 +89,9 @@ const mapDispatchToProps = {
   onUpdate: ProjectActions.updateProject
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ProjectsDetail));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(ProjectsDetail)
+);

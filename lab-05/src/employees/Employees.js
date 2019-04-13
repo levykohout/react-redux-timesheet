@@ -18,7 +18,14 @@ class Employees extends React.Component {
     return (
       <div>
         <h1>Employees</h1>
-        <EmployeeTable employees={ employees } onDelete={ deleteEmployee } onRestore={ restoreEmployee }/>
+        <EmployeeTable
+          employees={employees}
+          onDelete={deleteEmployee}
+          onRestore={restoreEmployee}
+        />
+        <Link to="/employees/detail">
+          <Button bsStyle="primary">New Employee</Button>
+        </Link>
       </div>
     );
   }
@@ -30,7 +37,7 @@ Employees.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    employees: state.employees.data,
+    employees: state.employees.data
   };
 };
 
@@ -40,4 +47,7 @@ const mapDispatchToProps = {
   restoreEmployee: EmployeeActionCreators.restoreEmployee
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Employees);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Employees);
